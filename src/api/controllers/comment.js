@@ -22,10 +22,14 @@ const getCommentById = async (req, res, next) => {
 const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
+    console.log(req.person.personName)
+    newComment.person = req.person
     const comment = await newComment.save()
     return res.status(201).json(comment)
   } catch (error) {
-    return res.status(400).json('error while posting comment')
+    return res
+      .status(400)
+      .json({ message: 'error when creating a comment', error })
   }
 }
 

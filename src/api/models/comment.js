@@ -4,9 +4,8 @@ const commentSchema = new mongoose.Schema(
   {
     img: { type: String, trim: true, required: false },
     description: { type: String, required: true },
-    updates: [{ type: String, ref: 'updates', required: false }],
     resolved: { type: Boolean, required: true, default: false },
-    person: { type: String, ref: 'people', required: true }
+    person: { type: mongoose.Types.ObjectId, required: true, ref: 'people' }
   },
   {
     timestamps: true,
