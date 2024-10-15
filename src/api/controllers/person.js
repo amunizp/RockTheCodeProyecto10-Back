@@ -56,13 +56,14 @@ const login = async (req, res, next) => {
     }
 
     if (bcrypt.compareSync(password, person.password)) {
+      console.log('going to generate a Key')
       const token = generateKey(person._id)
       return res.status(200).json({ token, person })
     }
 
     return res.status(400).json('User or Password not found.')
   } catch (error) {
-    return res.status(400).json('error')
+    return res.status(400).json('error while attempting to log in')
   }
 }
 
@@ -84,7 +85,7 @@ const updatePerson = async (req, res, next) => {
 
     return res.status(200).json(personUpdated)
   } catch (error) {
-    return res.status(400).json('error')
+    return res.status(400).json('error while updating a person´s details')
   }
 }
 

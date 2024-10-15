@@ -1,4 +1,3 @@
-const { isAuth } = require('../../middlewares/auth')
 const {
   getComments,
   getCommentById,
@@ -6,6 +5,7 @@ const {
   updateComment,
   deleteComment
 } = require('../controllers/comment')
+const { isAuth } = require('../middlewares/auth')
 
 const commentsRouter = require('express').Router()
 

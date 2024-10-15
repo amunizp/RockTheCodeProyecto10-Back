@@ -1,4 +1,3 @@
-const { isAuth } = require('../../middlewares/auth')
 const {
   getPeople,
   getPersonById,
@@ -6,6 +5,7 @@ const {
   updatePerson,
   login
 } = require('../controllers/person')
+const { isAuth } = require('../middlewares/auth')
 
 const peopleRouter = require('express').Router()
 
