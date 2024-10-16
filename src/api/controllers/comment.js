@@ -1,4 +1,5 @@
 const Comment = require('../models/comment')
+const Person = require('../models/person')
 
 const getComments = async (req, res, next) => {
   try {
@@ -22,9 +23,15 @@ const getCommentById = async (req, res, next) => {
 const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
-    console.log(req.person.personName)
     newComment.person = req.person
     const comment = await newComment.save()
+    // const updateCommentToPerson = Person.comments.push(comment)
+    // console.log(updateCommentToPerson)
+    // const newPerson = await Person.findOneAndUpdate(
+    //   { personName: req.person },
+    //   { comments: Person.comments.push(comment) }
+    // )
+    // console.log(newPerson)
     return res.status(201).json(comment)
   } catch (error) {
     return res
