@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema(
       // { type: mongoose.Types.ObjectId, required: false, ref: 'comments' }
       this
     ],
-    commentType: {
+    typeComment: {
       type: String,
       required: false,
       enum: ['repair', 'info request']

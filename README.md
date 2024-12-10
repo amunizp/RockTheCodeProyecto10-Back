@@ -147,3 +147,8 @@ you can add relationships to comments when creating them. this will help get a f
 `GET http://localhost:3000/api/v1/comments/person/670e40a8343a8f8921c21378`
 
 it will return a list of comments that have been written by this person.
+
+## get comment by type
+
+`http://localhost:3000/api/v1/comments/type/repair`
+Currently only two types are accepted: 'info request'or 'repair'.
