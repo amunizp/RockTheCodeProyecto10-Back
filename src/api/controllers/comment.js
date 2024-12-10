@@ -47,7 +47,7 @@ const updateComment = async (req, res, next) => {
     ]
     console.log('new comments')
     console.log(newComment)
-    console.log(oldComment.relatedComments)
+    console.log(newComment.relatedComments)
     console.log(oldComment.relatedComments)
     console.log(req.body.relatedComments)
     const commentUpdated = await Comment.findByIdAndUpdate(id, newComment, {

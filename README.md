@@ -137,3 +137,7 @@ the same as with comment you need to be logged in to see it.
 ## related comments
 
 you can add relationships to comments when creating them. this will help get a full story if a previous item appeared.
+
+## update a comment
+
+`PUT http://localhost:3000/api/v1/comments/670e4483aeb8ff5858476007`
