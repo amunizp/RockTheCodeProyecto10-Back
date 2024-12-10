@@ -20,6 +20,19 @@ const getCommentById = async (req, res, next) => {
   }
 }
 
+const getCommentByPerson = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    console.log(req.params)
+    const comments = await Comment.find({ person: id })
+    return res.status(200).json(comments)
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: 'error when getting comments by person', error })
+  }
+}
+
 const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
@@ -37,23 +50,18 @@ const postComment = async (req, res, next) => {
 const updateComment = async (req, res, next) => {
   try {
     const { id } = req.params
-    const oldComment = await Comment.findById(id)
+    const oldComment = await Comment.findById(id).populate('relatedComments')
     const newComment = new Comment(req.body)
     newComment._id = id
     newComment.relatedComments = [
-      'poop'
-      // ...oldComment.relatedComments,
-      // ...req.body.relatedComments
+      ...new Set([...oldComment.relatedComments, ...req.body.relatedComments])
     ]
     console.log('new comments')
-    console.log(newComment)
     console.log(newComment.relatedComments)
-    console.log(oldComment.relatedComments)
-    console.log(req.body.relatedComments)
     const commentUpdated = await Comment.findByIdAndUpdate(id, newComment, {
       new: true
     })
-    return res.status(202).json(commentUpdated)
+    return res.status(200).json(commentUpdated)
   } catch (error) {
     return res
       .status(400)
@@ -79,5 +87,6 @@ module.exports = {
   getCommentById,
   postComment,
   updateComment,
-  deleteComment
+  deleteComment,
+  getCommentByPerson
 }

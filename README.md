@@ -141,3 +141,9 @@ you can add relationships to comments when creating them. this will help get a f
 ## update a comment
 
 `PUT http://localhost:3000/api/v1/comments/670e4483aeb8ff5858476007`
+
+## get comment by person who owns it
+
+`GET http://localhost:3000/api/v1/comments/person/670e40a8343a8f8921c21378`
+
+it will return a list of comments that have been written by this person.

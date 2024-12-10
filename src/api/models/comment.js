@@ -7,8 +7,14 @@ const commentSchema = new mongoose.Schema(
     resolved: { type: Boolean, required: true, default: false },
     person: { type: mongoose.Types.ObjectId, required: true, ref: 'people' },
     relatedComments: [
-      { type: mongoose.Types.ObjectId, required: true, ref: 'comments' }
-    ]
+      // { type: mongoose.Types.ObjectId, required: false, ref: 'comments' }
+      this
+    ],
+    commentType: {
+      type: String,
+      required: false,
+      enum: ['repair', 'info request']
+    }
   },
   {
     timestamps: true,
