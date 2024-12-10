@@ -5,11 +5,10 @@ const connectMongo = require('./src/config/connectMongo')
 const express = require('express')
 const cors = require('cors')
 
-connectMongo()
 const app = express()
 app.use(express.json())
-app.use(cors())
-
+app.use(cors()) //conectar al front
+connectMongo()
 app.use('/api/v1/comments', commentsRouter)
 app.use('/api/v1/people', peopleRouter)
 

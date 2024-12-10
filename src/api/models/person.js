@@ -9,10 +9,7 @@ const personSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false
-    },
-    comments: [
-      { type: mongoose.Types.ObjectId, required: false, ref: 'comments' }
-    ]
+    }
   },
   {
     timestamps: true,

@@ -5,14 +5,14 @@ const {
   updatePerson,
   login
 } = require('../controllers/person')
-const { isAuth } = require('../middlewares/auth')
+const { isAuth, isAdmin } = require('../middlewares/auth')
 
 const peopleRouter = require('express').Router()
 
-peopleRouter.get('/', getPeople)
-peopleRouter.get('/:id', getPersonById)
+peopleRouter.get('/', [isAuth], getPeople)
+peopleRouter.get('/:id', [isAuth], getPersonById)
 peopleRouter.post('/register', register)
 peopleRouter.post('/login', login)
-peopleRouter.put('/:id', isAuth, updatePerson)
+peopleRouter.put('/:id', [isAdmin], updatePerson)
 
 module.exports = peopleRouter

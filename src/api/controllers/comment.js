@@ -24,14 +24,8 @@ const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
     newComment.person = req.person
+    const { id } = req.person._id
     const comment = await newComment.save()
-    // const updateCommentToPerson = Person.comments.push(comment)
-    // console.log(updateCommentToPerson)
-    // const newPerson = await Person.findOneAndUpdate(
-    //   { personName: req.person },
-    //   { comments: Person.comments.push(comment) }
-    // )
-    // console.log(newPerson)
     return res.status(201).json(comment)
   } catch (error) {
     return res
@@ -43,14 +37,27 @@ const postComment = async (req, res, next) => {
 const updateComment = async (req, res, next) => {
   try {
     const { id } = req.params
+    const oldComment = await Comment.findById(id)
     const newComment = new Comment(req.body)
     newComment._id = id
+    newComment.relatedComments = [
+      'poop'
+      // ...oldComment.relatedComments,
+      // ...req.body.relatedComments
+    ]
+    console.log('new comments')
+    console.log(newComment)
+    console.log(oldComment.relatedComments)
+    console.log(oldComment.relatedComments)
+    console.log(req.body.relatedComments)
     const commentUpdated = await Comment.findByIdAndUpdate(id, newComment, {
       new: true
     })
     return res.status(202).json(commentUpdated)
   } catch (error) {
-    return res.status(400).json('error while updating')
+    return res
+      .status(400)
+      .json({ message: 'error while updating', error: error.message })
   }
 }
 
