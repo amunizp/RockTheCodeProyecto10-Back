@@ -7,7 +7,7 @@ const {
   getCommentByPerson,
   getCommentByType
 } = require('../controllers/comment')
-const { isAuth } = require('../middlewares/auth')
+const { isAuth } = require('../../middleware/auth')
 
 const commentsRouter = require('express').Router()
 

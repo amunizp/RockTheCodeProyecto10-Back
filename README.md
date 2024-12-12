@@ -1,5 +1,7 @@
 # RockTheCodeProyecto10-Back
 
+Project to have a log of theactivities that are going on in an RA.
+
 ## Run the back end
 
     "npm run test": "node ./index.js",

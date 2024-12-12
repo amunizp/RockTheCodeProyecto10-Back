@@ -1,16 +1,26 @@
 require('dotenv').config()
-const commentsRouter = require('./src/api/routes/comment')
-const peopleRouter = require('./src/api/routes/person')
+
 const connectMongo = require('./src/config/connectMongo')
 const express = require('express')
 const cors = require('cors')
 
+const mainRouter = require('./src/api/routes/mainRouter')
+const cloudinary = require('cloudinary').v2
+
 const app = express()
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+})
+
 app.use(express.json())
 app.use(cors()) //conectar al front
+
 connectMongo()
-app.use('/api/v1/comments', commentsRouter)
-app.use('/api/v1/people', peopleRouter)
+
+app.use('/api/v1/', mainRouter)
 
 app.use('*', (rew, res, next) => {
   return res.status(404).json('Route not found')

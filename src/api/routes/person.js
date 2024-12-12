@@ -5,7 +5,7 @@ const {
   updatePerson,
   login
 } = require('../controllers/person')
-const { isAuth, isAdmin } = require('../middlewares/auth')
+const { isAuth, isAdmin } = require('../../middleware/auth')
 
 const peopleRouter = require('express').Router()
 

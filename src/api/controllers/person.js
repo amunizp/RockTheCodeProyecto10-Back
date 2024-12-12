@@ -1,6 +1,6 @@
 const Person = require('../models/person')
 const bcrypt = require('bcrypt')
-const { generateKey } = require('../utils/jwt')
+const { generateKey } = require('../../utils/jwt')
 
 const getPeople = async (req, res, next) => {
   try {
