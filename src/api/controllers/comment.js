@@ -51,9 +51,13 @@ const getCommentByType = async (req, res, next) => {
 const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
-    if (req.file) {
-      newComment.img = req.file.path
-      console.log(req.file.path)
+    //console.log(req.files)
+    if (req.files) {
+      console.log('File uploaded:', req.files)
+      newComment.img = req.files.map((file) => file.path) // Assign the file URL to the img field
+      console.log('New comment img:', newComment.img)
+    } else {
+      console.log('I did not find a file to upload')
     }
     newComment.person = req.person
     const { id } = req.person._id
