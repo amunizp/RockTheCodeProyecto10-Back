@@ -51,6 +51,10 @@ const getCommentByType = async (req, res, next) => {
 const postComment = async (req, res, next) => {
   try {
     const newComment = new Comment(req.body)
+    if (req.file) {
+      newComment.img = req.file.path
+      console.log(req.file.path)
+    }
     newComment.person = req.person
     const { id } = req.person._id
     const comment = await newComment.save()
