@@ -1,5 +1,5 @@
+const deleteCloudinaryFiles = require('../../utils/deleteFilesCloudinary')
 const Comment = require('../models/comment')
-const Person = require('../models/person')
 
 const getComments = async (req, res, next) => {
   try {
@@ -75,6 +75,14 @@ const updateComment = async (req, res, next) => {
     const { id } = req.params
     const oldComment = await Comment.findById(id)
     const newComment = new Comment(req.body)
+    //console.log(req.body)
+    if (req.files) {
+      console.log('File uploaded:', req.files)
+      newComment.img = req.files.map((file) => file.path) // Assign the file URL to the img field
+      console.log('New comment img:', newComment.img)
+    } else {
+      console.log('I did not find a file to upload')
+    }
     newComment._id = id
     newListRelatedComments = req.body.relatedComments || []
     newComment.relatedComments = [
@@ -94,13 +102,19 @@ const updateComment = async (req, res, next) => {
 const deleteComment = async (req, res, next) => {
   try {
     const { id } = req.params
-    const comment = await Comment.findByIdAndDelete(id)
+    const commentDeleted = await Comment.findByIdAndDelete(id)
+    console.log('attempting delete', commentDeleted)
+    if (commentDeleted) {
+      deleteCloudinaryFiles(commentDeleted.img)
+    }
     return res.status(200).json({
-      message: 'This commentHas been deleted',
-      commentDeleted: comment
+      message: 'This comment has been deleted',
+      commentDeleted: commentDeleted
     })
   } catch (error) {
-    return res.status(400).json('error while deleting')
+    return res
+      .status(400)
+      .json({ message: 'error while deleting', error: error.message })
   }
 }
 

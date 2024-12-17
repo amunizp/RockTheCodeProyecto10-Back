@@ -152,11 +152,19 @@ it will return a list of comments that have been written by this person.
 
 ## get comment by type
 
-`http://localhost:3000/api/v1/comments/type/repair`
+`GET http://localhost:3000/api/v1/comments/type/repair`
 Currently only two types are accepted: 'info request'or 'repair'.
 
 ## Uploading images
 
+You can upload images when you create or update a comment. Body > form-data on the table call it img and make sure you select file. You can select multiple files.
+
+## Delete comment
+
+`DELETE http://localhost:3000/api/v1/comments/67584b6a6838de13c9e1649b`
+
+This will delete the comment and any cloudinary files uploaded with it.
+
 **TODO use cloudinary to auto tag images (a google service?)**
 
-You can upload images when you create or update a comment. Body > form-data on the table call it img and make sure you select file. You can select multiple files.
+**TODO location CRUD\*** w3w https://developer.what3words.com/tutorial/javascript#setup &/or https://mongoosejs.com/docs/geojson.html &/or simply set a list of locations. The latter is the simplest hopefully picture will do the rest.

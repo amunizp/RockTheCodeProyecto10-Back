@@ -17,7 +17,7 @@ commentsRouter.get('/person/:id', isAuth, getCommentByPerson)
 commentsRouter.get('/type/:typeComment', isAuth, getCommentByType)
 commentsRouter.get('/:id', isAuth, getCommentById)
 commentsRouter.post('/', isAuth, uploadFile.array('img', 4), postComment)
-commentsRouter.put('/:id', isAuth, updateComment)
+commentsRouter.put('/:id', isAuth, uploadFile.array('img', 4), updateComment)
 commentsRouter.delete('/:id', isAuth, deleteComment)
 
 module.exports = commentsRouter
