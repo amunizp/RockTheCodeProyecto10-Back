@@ -6,7 +6,12 @@ const getComments = async (req, res, next) => {
     const comments = await Comment.find()
     return res.status(200).json(comments)
   } catch (error) {
-    return res.status(400).json('error while getting comments')
+    return res
+      .status(400)
+      .json({
+        message: 'Error when getting all comments',
+        error: error.message
+      })
   }
 }
 

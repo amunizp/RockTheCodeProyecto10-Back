@@ -41,7 +41,9 @@ const register = async (req, res, next) => {
     const person = await newPerson.save()
     return res.status(201).json(person)
   } catch (error) {
-    return res.status(400).json('error registering a new person')
+    return res
+      .status(400)
+      .json({ message: 'error registering a new person', error: error.message })
   }
 }
 

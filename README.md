@@ -168,3 +168,5 @@ This will delete the comment and any cloudinary files uploaded with it.
 **TODO use cloudinary to auto tag images (a google service?)**
 
 **TODO location CRUD\*** w3w https://developer.what3words.com/tutorial/javascript#setup &/or https://mongoosejs.com/docs/geojson.html &/or simply set a list of locations. The latter is the simplest hopefully picture will do the rest.
+
+**TODO login and register so that it is with a form just like everything else and not body, would mean I need to use multer there to?**

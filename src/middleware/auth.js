@@ -4,7 +4,9 @@ const { verifyKey } = require('../config/jwt')
 const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization
+    // console.log('the authorisation as it comes from the header', token)
     const parsedToken = token.split(' ').pop().trim()
+    // console.log(parsedToken)
 
     const { id } = verifyKey(parsedToken)
     const person = await Person.findById(id)
@@ -13,7 +15,9 @@ const isAuth = async (req, res, next) => {
     req.person = person
     next()
   } catch (error) {
-    return res.status(400).json('You are not authorised')
+    return res
+      .status(400)
+      .json({ message: 'You are not authorised', error: error.message })
   }
 }
 
