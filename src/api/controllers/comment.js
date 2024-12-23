@@ -3,15 +3,13 @@ const Comment = require('../models/comment')
 
 const getComments = async (req, res, next) => {
   try {
-    const comments = await Comment.find()
+    const comments = await Comment.find().populate('person')
     return res.status(200).json(comments)
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        message: 'Error when getting all comments',
-        error: error.message
-      })
+    return res.status(400).json({
+      message: 'Error when getting all comments',
+      error: error.message
+    })
   }
 }
 
