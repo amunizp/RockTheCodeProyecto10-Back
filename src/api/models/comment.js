@@ -13,7 +13,7 @@ const commentSchema = new mongoose.Schema(
     typeComment: {
       type: String,
       required: false,
-      enum: ['repair', 'info request']
+      enum: ['🛠️', '💬', '🌳']
     }
   },
   {
