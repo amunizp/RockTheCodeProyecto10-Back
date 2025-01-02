@@ -32,6 +32,7 @@ deployed ? (theOrigin = allowedOrigins[1]) : (theOrigin = allowedOrigins[0])
 //   return callback(null, true)
 // }
 app.use(express.json())
+console.log(`we are delployed ${deployed} so the origin is ${theOrigin}`)
 app.use(
   cors({
     origin: theOrigin, //'http://localhost:5173', // theOrigin, //Replace with your frontend's domain
