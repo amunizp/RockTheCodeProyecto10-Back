@@ -16,7 +16,14 @@ cloudinary.config({
 })
 
 app.use(express.json())
-app.use(cors()) //conectar al front
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // Replace with your frontend's domain
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+  })
+) //conectar al front
 
 connectMongo()
 
