@@ -174,4 +174,5 @@ This will delete the comment and any cloudinary files uploaded with it.
 
 **TODO pagination of the get commands only 5 Or 10 per page**
 **TODO get per category and get by location once created**
-**TODO relation between locations: window -> parent flat -> -parent floor ->parent block** 
+**TODO relation between locations: window -> parent flat -> -parent floor ->parent block**
+**TODO allow the use of two fronts to get the details from**

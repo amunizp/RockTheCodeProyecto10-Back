@@ -19,7 +19,7 @@ const allowedOrigins = [
   'http://localhost:5173', // Your local development URL
   'https://rock-the-code-proyecto10-front.vercel.app' // Your deployed frontend URL
 ]
-const deployed = true
+const deployed = false
 deployed ? (theOrigin = allowedOrigins[1]) : (theOrigin = allowedOrigins[0])
 // const theOrigin = function (origin, callback) {
 //   // Allow requests with no origin (like mobile apps or curl requests)
