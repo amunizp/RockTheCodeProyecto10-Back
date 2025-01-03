@@ -4,9 +4,9 @@ const { verifyKey } = require('../config/jwt')
 const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization
-    // console.log('the authorisation as it comes from the header', token)
+    console.log('the authorisation as it comes from the header', token)
     const parsedToken = token.split(' ').pop().trim()
-    // console.log(parsedToken)
+    console.log(parsedToken)
 
     const { id } = verifyKey(parsedToken)
     const person = await Person.findById(id)
