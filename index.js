@@ -19,32 +19,33 @@ const allowedOrigins = [
   'http://localhost:5173', // Your local development URL
   'https://rock-the-code-proyecto10-front.vercel.app' // Your deployed frontend URL
 ]
-const deployed = true
-deployed ? (theOrigin = allowedOrigins[1]) : (theOrigin = allowedOrigins[0])
-// const theOrigin = function (origin, callback) {
-//   // Allow requests with no origin (like mobile apps or curl requests)
-//   if (!origin) return callback(null, true)
-//   if (allowedOrigins.indexOf(origin) === -1) {
-//     const msg =
-//       'The CORS policy for this site does not allow access from the specified Origin.'
-//     return callback(new Error(msg), false)
-//   }
-//   return callback(null, true)
-// }
-app.use(express.json())
+const deployed = false
+const theOrigin = deployed ? allowedOrigins[1] : allowedOrigins[0]
+
 console.log(`we are deployed ${deployed} so the origin is ${theOrigin}`)
 app.use(
   cors({
-    origin: theOrigin, //'http://localhost:5173', // theOrigin(), //Replace with your frontend's domain
+    // origin: theOrigin,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true)
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          'The CORS policy for this site does not allow access from the specified Origin.'
+        return callback(new Error(msg), false)
+      }
+      return callback(null, true)
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204
   })
 ) //conectar al front
 
-connectMongo()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/v1/', mainRouter)
+connectMongo()
 
 app.use('*', (rew, res, next) => {
   return res.status(404).json('Route not found')
