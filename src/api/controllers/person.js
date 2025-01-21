@@ -65,7 +65,7 @@ const login = async (req, res, next) => {
 
     return res.status(400).json('User or Password not found.')
   } catch (error) {
-    return res.status(400).json('error while attempting to log in')
+    return res.status(400).json('Error while attempting to log in')
   }
 }
 
