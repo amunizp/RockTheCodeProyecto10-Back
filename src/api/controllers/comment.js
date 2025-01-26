@@ -19,7 +19,10 @@ const getCommentById = async (req, res, next) => {
     const comment = await Comment.findById(id)
     return res.status(200).json(comment)
   } catch (error) {
-    return res.status(400).json('error while getting comment by id')
+    return res.status(400).json({
+      message: 'error while getting comment by id',
+      error: error.message
+    })
   }
 }
 
@@ -34,7 +37,10 @@ const getCommentByPerson = async (req, res, next) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: 'error when getting comments by person', error })
+      .json({
+        message: 'error when getting comments by person',
+        error: error.message
+      })
   }
 }
 
@@ -47,7 +53,10 @@ const getCommentByType = async (req, res, next) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: 'error when getting comments by type', error })
+      .json({
+        message: 'error when getting comments by type',
+        error: error.message
+      })
   }
 }
 
@@ -69,7 +78,7 @@ const postComment = async (req, res, next) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: 'error when creating a comment', error })
+      .json({ message: 'error when creating a comment', error: error.message })
   }
 }
 

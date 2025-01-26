@@ -170,9 +170,7 @@ This will delete the comment and any cloudinary files uploaded with it.
 
 **TODO location CRUD\*** w3w https://developer.what3words.com/tutorial/javascript#setup &/or https://mongoosejs.com/docs/geojson.html &/or simply set a list of locations. The latter is the simplest hopefully picture will do the rest.
 
-**TODO login and register so that it is with a form just like everything else and not body, would mean I need to use multer there to?**
-
 **TODO pagination of the get commands only 5 Or 10 per page**
-**TODO get per category and get by location once created**
+**TODO get by location once created**
 **TODO relation between locations: window -> parent flat -> -parent floor ->parent block**
-**TODO allow the use of two fronts to get the details from**
+**TODO allow the use of two fronts to get the details from for development purposes**

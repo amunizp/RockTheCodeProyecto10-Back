@@ -7,7 +7,9 @@ const getPeople = async (req, res, next) => {
     const people = await Person.find()
     return res.status(200).json(people)
   } catch (error) {
-    return res.status(400).json('error getting all people')
+    return res
+      .status(400)
+      .json({ message: 'error getting all people', error: error.message })
   }
 }
 
@@ -17,7 +19,9 @@ const getPersonById = async (req, res, next) => {
     const person = await Person.findById(id).populate('comments')
     return res.status(200).json(person)
   } catch (error) {
-    return res.status(400).json('error getting person by id')
+    return res
+      .status(400)
+      .json({ message: 'error getting person by id', error: error.message })
   }
 }
 
@@ -30,7 +34,7 @@ const register = async (req, res, next) => {
     if (personDuplicated) {
       return res
         .status(400)
-        .json('Person already exists, try a different name.')
+        .json({ message: 'Person already exists, try a different name.' })
     }
 
     const newPerson = new Person({
@@ -54,7 +58,7 @@ const login = async (req, res, next) => {
     const person = await Person.findOne({ personName })
 
     if (!person) {
-      return res.status(400).json('User or Password not found.')
+      return res.status(400).json({ message: 'User or Password not found.' })
     }
 
     if (bcrypt.compareSync(password, person.password)) {
@@ -63,9 +67,14 @@ const login = async (req, res, next) => {
       return res.status(200).json({ token, person })
     }
 
-    return res.status(400).json('User or Password not found.')
+    return res.status(400).json({ message: 'User or Password not found.' })
   } catch (error) {
-    return res.status(400).json('Error while attempting to log in')
+    return res
+      .status(400)
+      .json({
+        message: 'Error while attempting to log in',
+        error: error.message
+      })
   }
 }
 
@@ -74,7 +83,9 @@ const updatePerson = async (req, res, next) => {
     const { id } = req.params
 
     if (req.person._id.toString() !== id) {
-      return res.status(400).json('You can only modify your own person.')
+      return res
+        .status(400)
+        .json({ message: 'You can only modify your own person.' })
     }
 
     const oldPerson = await Person.findById(id)
@@ -87,7 +98,12 @@ const updatePerson = async (req, res, next) => {
 
     return res.status(200).json(personUpdated)
   } catch (error) {
-    return res.status(400).json('error while updating a person´s details')
+    return res
+      .status(400)
+      .json({
+        message: 'error while updating a person´s details',
+        error: error.message
+      })
   }
 }
 
