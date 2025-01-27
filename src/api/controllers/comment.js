@@ -1,4 +1,4 @@
-const deleteCloudinaryFiles = require('../../utils/deleteFilesCloudinary')
+const { deleteCloudinaryFiles } = require('../../utils/deleteFilesCloudinary')
 const Comment = require('../models/comment')
 
 const getComments = async (req, res, next) => {
@@ -35,12 +35,10 @@ const getCommentByPerson = async (req, res, next) => {
     )
     return res.status(200).json(comments)
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        message: 'error when getting comments by person',
-        error: error.message
-      })
+    return res.status(400).json({
+      message: 'error when getting comments by person',
+      error: error.message
+    })
   }
 }
 
@@ -51,12 +49,10 @@ const getCommentByType = async (req, res, next) => {
     const comments = await Comment.find({ typeComment })
     return res.status(200).json(comments)
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        message: 'error when getting comments by type',
-        error: error.message
-      })
+    return res.status(400).json({
+      message: 'error when getting comments by type',
+      error: error.message
+    })
   }
 }
 
@@ -118,6 +114,10 @@ const deleteComment = async (req, res, next) => {
     console.log('attempting delete', commentDeleted)
     if (commentDeleted) {
       deleteCloudinaryFiles(commentDeleted.img)
+      console.log(
+        'Attempted to delete images from Cloudinary: ',
+        commentDeleted.img
+      )
     }
     return res.status(200).json({
       message: 'This comment has been deleted',

@@ -174,3 +174,5 @@ This will delete the comment and any cloudinary files uploaded with it.
 **TODO get by location once created**
 **TODO relation between locations: window -> parent flat -> -parent floor ->parent block**
 **TODO allow the use of two fronts to get the details from for development purposes**
+
+**TODO related strings created as an empty string [""] so length = 1**
