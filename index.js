@@ -43,7 +43,7 @@ app.use(
 //https://dev.to/saqib_abbas_8d1b9da205a09/fixing-the-cors-policy-no-access-control-allow-origin-error-in-web-development-36e4
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', [
-    'http://localhost:3000',
+    'http://localhost:5173',
     'https://rock-the-code-proyecto10-front.vercel.app'
   ])
   res.header(
