@@ -25,16 +25,16 @@ const theOrigin = deployed ? allowedOrigins[1] : allowedOrigins[0]
 console.log(`we are deployed ${deployed} so the origin is ${theOrigin}`)
 app.use(
   cors({
-    // origin: theOrigin,
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true)
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          'The CORS policy for this site does not allow access from the specified Origin.'
-        return callback(new Error(msg), false)
-      }
-      return callback(null, true)
-    },
+    origin: theOrigin,
+    // origin: function (origin, callback) {
+    //   if (!origin) return callback(null, true)
+    //   if (allowedOrigins.indexOf(origin) === -1) {
+    //     const msg =
+    //       'Andres is not sure of this. The CORS policy for this site does not allow access from the specified Origin.'
+    //     return callback(new Error(msg), false)
+    //   }
+    //   return callback(null, true)
+    // },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204
@@ -42,10 +42,10 @@ app.use(
 ) //conectar al front
 //https://dev.to/saqib_abbas_8d1b9da205a09/fixing-the-cors-policy-no-access-control-allow-origin-error-in-web-development-36e4
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', [
-    'http://localhost:5173',
+  res.header(
+    'Access-Control-Allow-Origin',
     'https://rock-the-code-proyecto10-front.vercel.app'
-  ])
+  )
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
