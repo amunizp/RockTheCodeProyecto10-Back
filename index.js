@@ -17,7 +17,7 @@ cloudinary.config({
 
 const allowedOrigins = [
   'http://localhost:5173', // Your local development URL
-  'https://rock-the-code-proyecto10-back.vercel.app/' // Your deployed frontend URL
+  'https://rock-the-code-proyecto10-front.vercel.app/' // Your deployed frontend URL
 ]
 const deployed = true
 const theOrigin = deployed ? allowedOrigins[1] : allowedOrigins[0]
@@ -26,15 +26,6 @@ console.log(`we are deployed ${deployed} so the origin is ${theOrigin}`)
 app.use(
   cors({
     origin: theOrigin,
-    // origin: function (origin, callback) {
-    //   if (!origin) return callback(null, true)
-    //   if (allowedOrigins.indexOf(origin) === -1) {
-    //     const msg =
-    //       'The CORS policy for this site does not allow access from the specified Origin.'
-    //     return callback(new Error(msg), false)
-    //   }
-    //   return callback(null, true)
-    // },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204
