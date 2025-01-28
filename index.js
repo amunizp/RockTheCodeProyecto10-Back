@@ -17,7 +17,7 @@ cloudinary.config({
 
 const allowedOrigins = [
   'http://localhost:5173', // Your local development URL
-  'https://rock-the-code-proyecto10-front.vercel.app' // Your deployed frontend URL
+  'https://rock-the-code-proyecto10-back.vercel.app/' // Your deployed frontend URL
 ]
 const deployed = true
 const theOrigin = deployed ? allowedOrigins[1] : allowedOrigins[0]
