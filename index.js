@@ -19,7 +19,7 @@ const allowedOrigins = [
   'http://localhost:5173', // Your local development URL
   'https://rock-the-code-proyecto10-front.vercel.app' // Your deployed frontend URL
 ]
-const deployed = false
+const deployed = true
 const theOrigin = deployed ? allowedOrigins[1] : allowedOrigins[0]
 
 console.log(`we are deployed ${deployed} so the origin is ${theOrigin}`)
@@ -40,6 +40,18 @@ app.use(
     optionsSuccessStatus: 204
   })
 ) //conectar al front
+//https://dev.to/saqib_abbas_8d1b9da205a09/fixing-the-cors-policy-no-access-control-allow-origin-error-in-web-development-36e4
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', [
+    'http://localhost:3000',
+    'https://rock-the-code-proyecto10-front.vercel.app'
+  ])
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
